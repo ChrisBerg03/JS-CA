@@ -15,12 +15,14 @@ function displayMovie(movie) {
     const movieRating = document.createElement("p");
     const movieRelease = document.createElement("p");
     const moviePrice = document.createElement("p");
+    const moviePurchseBTN = document.createElement("button");
     movieTitle.classList.add("movieTitle");
     movieDescription.classList.add("movieDescription");
     movieGenre.classList.add("movieGenre");
     movieRating.classList.add("movieRating");
     movieRelease.classList.add("movieRelease");
     moviePrice.classList.add("moviePrice");
+    moviePurchseBTN.classList.add("moviePurchaseBTN");
     movieImg.src = movie.image;
     movieImg.classList.add("movieImage");
     movieTitle.innerText = "Title: " + movie.title;
@@ -29,6 +31,7 @@ function displayMovie(movie) {
     movieRating.innerText = "Rating: " + movie.rating;
     movieRelease.innerText = "Released: " + movie.released;
     moviePrice.innerText = "Price: " + movie.price + " kr";
+    moviePurchseBTN.innerText = "Purchase Movie";
     movieContainer.appendChild(movieList);
     movieContainer.appendChild(movieTextContainer);
     movieList.appendChild(movieImg);
@@ -52,6 +55,7 @@ function displayMovie(movie) {
         movieTextContainer.appendChild(movieDiscountPrice);
     } else {
     }
+    movieTextContainer.appendChild(moviePurchseBTN);
 }
 
 home.addEventListener("click", function () {

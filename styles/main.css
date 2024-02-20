@@ -4,11 +4,7 @@
 }
 
 html {
-    background-image: radial-gradient(
-        circle 600px at 58% 40%,
-        rgba(100, 0, 0, 1) 30%,
-        rgba(0, 0, 0, 1) 100.7%
-    );
+    overflow-x: hidden;
 }
 
 body {
@@ -17,6 +13,11 @@ body {
     height: 100dvh;
     display: flex;
     justify-content: center;
+    background-image: radial-gradient(
+        circle 400px at 58% 50%,
+        rgba(100, 0, 0, 1) 30%,
+        rgba(0, 0, 0, 1) 100.7%
+    );
 }
 
 .container {
@@ -42,6 +43,7 @@ body {
 .movieImage {
     height: 50vh;
     width: auto;
+    border-radius: 16px;
 }
 
 .mainNav {
@@ -50,10 +52,27 @@ body {
     justify-content: space-evenly;
     align-items: center;
     height: 50px;
+    font-size: 1.2rem;
 }
 
 .mainNav li {
     list-style-type: none;
+}
+
+.mainNav li a {
+    cursor: pointer;
+}
+
+#movieFilter {
+    width: 200px;
+    margin: 24px auto;
+    padding: 16px;
+    background: #2d2f31;
+    color: #fff;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    cursor: pointer;
+    letter-spacing: 2px;
 }
 
 .movieSale {
@@ -67,4 +86,12 @@ body {
 .movieDescription {
     width: 216px;
     letter-spacing: 0.8px;
+}
+
+.moviePurchaseBTN {
+    background-color: #2d2f31;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-size: 1.2rem;
+    border: none;
 }
