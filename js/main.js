@@ -1,7 +1,6 @@
 const movieContainer = document.getElementById("movieContainer");
 const movieFilter = document.getElementById("movieFilter");
 let movieAllArray = [];
-let movieFilteredArray = [];
 
 // fetch the data and parse it to json
 async function fetchData() {
