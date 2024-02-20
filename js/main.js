@@ -24,6 +24,10 @@ function displayMovie(movie) {
     const movieImg = document.createElement("img");
     movieImg.src = movie.image;
     movieImg.classList.add("movieImage");
+    movieImg.addEventListener("click", () => {
+        sessionStorage.setItem("selectedmovie", JSON.stringify(movie));
+        window.location.href = "http://127.0.0.1:5500/pages/details.html";
+    });
     movieContainer.appendChild(movieList);
     movieList.appendChild(movieImg);
     if (movie.onSale == true) {
