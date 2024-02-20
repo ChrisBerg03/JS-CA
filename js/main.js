@@ -35,11 +35,41 @@ function displayMovie(movie) {
     } else {
     }
 }
+movieFilter.addEventListener("change", function () {
+    let selectedGenre = this.value;
+    filterByGenre(selectedGenre);
+});
+
+const allOption = document.createElement("option");
+allOption.innerText = "All movies";
+movieFilter.appendChild(allOption);
+
+function filterByGenre(movieToFilter) {
+    let movieFilteredArray = [];
+    if (movieToFilter === "All movies") {
+        movieFilteredArray = [...movieAllArray];
+    } else {
+        for (const movie of movieAllArray) {
+            if (movie.genre === movieToFilter) {
+                movieFilteredArray.push(movie);
+            }
+        }
+    }
+
+    movieContainer.innerHTML = "";
+    for (const movie of movieFilteredArray) {
+        displayMovie(movie);
+    }
+}
+
+filterByGenre();
 
 function moviesToDropDown() {
-    for (const movie of movieAllArray) {
+    let genres = new Set(movieAllArray.map((movie) => movie.genre));
+
+    for (const genre of genres) {
         const movieGenreOption = document.createElement("option");
-        movieGenreOption.innerText = movie.genre;
+        movieGenreOption.innerText = genre;
         movieFilter.appendChild(movieGenreOption);
     }
 }
