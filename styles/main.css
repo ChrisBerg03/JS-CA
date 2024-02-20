@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    background-color: #555;
+}
+
+.container {
+    max-width: 1050px;
+}
+
+#movieContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+
+#movieContainer li {
+    list-style-type: none;
+    position: relative;
+}
+
+.movieImage {
+    height: 50vh;
+    width: auto;
+}
+
+.mainNav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+}
+
+.mainNav li {
+    list-style-type: none;
+}
+
+.movieSale {
+    position: absolute;
+    right: -25px;
+    top: -10px;
+    object-fit: contain;
+    width: 40%;
+}
