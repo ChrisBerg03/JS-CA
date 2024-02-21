@@ -1,7 +1,9 @@
 const movieContainer = document.getElementById("movieContainer");
 const movieFilter = document.getElementById("movieFilter");
+const home = document.getElementById("home");
+const movies = document.getElementById("movies");
+const cart = document.getElementById("cart");
 let movieAllArray = [];
-let movieFilteredArray = [];
 
 // fetch the data and parse it to json
 async function fetchData() {
@@ -25,9 +27,13 @@ function displayMovie(movie) {
     const movieImg = document.createElement("img");
     movieImg.src = movie.image;
     movieImg.classList.add("movieImage");
+    movieImg.addEventListener("click", () => {
+        sessionStorage.setItem("selectedMovie", JSON.stringify(movie));
+        window.location.href = "http://127.0.0.1:5500/pages/details.html";
+    });
     movieContainer.appendChild(movieList);
     movieList.appendChild(movieImg);
-    if (movie.onSale == true) {
+    if (movie.onSale === true) {
         const movieSaleImg = document.createElement("img");
         movieSaleImg.classList.add("movieSale");
         movieSaleImg.src = "./assets/images/sale.png";
@@ -35,6 +41,7 @@ function displayMovie(movie) {
     } else {
     }
 }
+
 movieFilter.addEventListener("change", function () {
     let selectedGenre = this.value;
     filterByGenre(selectedGenre);
@@ -62,8 +69,6 @@ function filterByGenre(movieToFilter) {
     }
 }
 
-filterByGenre();
-
 function moviesToDropDown() {
     let genres = new Set(movieAllArray.map((movie) => movie.genre));
 
@@ -73,3 +78,15 @@ function moviesToDropDown() {
         movieFilter.appendChild(movieGenreOption);
     }
 }
+
+home.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+movies.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+cart.addEventListener("click", function () {
+    document.location.href = "/pages/checkout.html";
+});
