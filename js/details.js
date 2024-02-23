@@ -1,9 +1,8 @@
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const movieContainer = document.getElementById("movieContainer");
+const moviePurchseBTN = document.createElement("button");
 
 displayMovie(selectedMovie);
-
-console.log(selectedMovie);
 
 function displayMovie(movie) {
     const movieList = document.createElement("li");
@@ -15,13 +14,8 @@ function displayMovie(movie) {
     const movieRating = document.createElement("p");
     const movieRelease = document.createElement("p");
     const moviePrice = document.createElement("p");
-    const moviePurchseBTN = document.createElement("button");
     movieTitle.classList.add("movieTitle");
     movieDescription.classList.add("movieDescription");
-    movieGenre.classList.add("movieGenre");
-    movieRating.classList.add("movieRating");
-    movieRelease.classList.add("movieRelease");
-    moviePrice.classList.add("moviePrice");
     moviePurchseBTN.classList.add("moviePurchaseBTN");
     movieImg.src = movie.image;
     movieImg.classList.add("movieImage");
@@ -66,4 +60,56 @@ movies.addEventListener("click", function () {
 });
 cart.addEventListener("click", function () {
     document.location.href = "/pages/checkout.html";
+});
+
+// const movieCart = [];
+
+// function movieInStorage(selectedMovie) {
+//     for (let i = 0; i < sessionStorage.length; i++) {
+//         const key = sessionStorage.key(i);
+//         const value = sessionStorage.getItem(key);
+//         if (value === selectedMovie) {
+//             moviePurchseBTN.innerText = "Remove from cart";
+//             return true;
+//         }
+//     }
+//     moviePurchseBTN.innerText = "Purchase";
+//     return false;
+// }
+
+// if (!movieInStorage(selectedMovie)) {
+//     sessionStorage.setItem(selectedMovie);
+// }
+
+// movieInStorage(selectedMovie);
+
+// moviePurchseBTN.addEventListener("click", function () {
+//     const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+//     cart.push(selectedMovie);
+//     sessionStorage.setItem("cart", JSON.stringify(cart));
+// });
+
+function movieInStorage(selectedMovie) {
+    for (let i = 0; i < sessionStorage.length; i++) {
+        const key = sessionStorage.key(i);
+        const value = sessionStorage.getItem(key);
+        if (value === selectedMovie) {
+            return true;
+        }
+    }
+    moviePurchseBTN.innerText = "Purchase";
+    return false;
+}
+
+if (!movieInStorage(selectedMovie)) {
+    sessionStorage.setItem("cart", JSON.stringify([]));
+}
+
+moviePurchseBTN.addEventListener("click", function () {
+    if (movieInStorage(selectedMovie) === true) {
+        moviePurchseBTN.innerText = "Remove from cart";
+    }
+    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
+    cart.push(selectedMovie);
+    sessionStorage.setItem("cart", JSON.stringify(cart));
 });
