@@ -1,12 +1,12 @@
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const movieContainer = document.getElementById("movieContainer");
 const moviePurchseBTN = document.createElement("button");
-const myCart = [];
+const key = "myCart";
+const movieCart = JSON.parse(sessionStorage.getItem(key)) || [];
 
 displayMovie(selectedMovie);
 
 function displayMovie(movie) {
-    myCart.push(JSON.parse(sessionStorage.getItem("cart")));
     const movieList = document.createElement("li");
     const movieTextContainer = document.createElement("li");
     const movieImg = document.createElement("img");
@@ -49,15 +49,17 @@ function displayMovie(movie) {
             "Price: " + movie.discountedPrice + " kr";
         movieDiscountPrice.classList.add("moviePrice");
         movieTextContainer.appendChild(movieDiscountPrice);
-    } else {
     }
     movieTextContainer.appendChild(moviePurchseBTN);
 }
 
 moviePurchseBTN.addEventListener("click", function () {
-    myCart.push(selectedMovie);
-    sessionStorage.setItem("cart", JSON.stringify(myCart));
+    movieCart.push(selectedMovie);
 });
+
+window.onbeforeunload = function () {
+    sessionStorage.setItem(key, JSON.stringify(movieCart));
+};
 
 home.addEventListener("click", function () {
     document.location.href = "/index.html";
