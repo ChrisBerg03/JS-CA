@@ -5,7 +5,6 @@ const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
 let movieAllArray = [];
 
-// fetch the data and parse it to json
 async function fetchData() {
     const reponse = await fetch("https://api.noroff.dev/api/v1/square-eyes");
     const result = await reponse.json();
@@ -16,12 +15,9 @@ async function fetchData() {
         displayMovie(movie);
     }
     moviesToDropDown();
-    console.log(movieAllArray);
 }
-// calling the fetched data
 fetchData();
 
-// displaying the images
 function displayMovie(movie) {
     const movieList = document.createElement("li");
     const movieImg = document.createElement("img");

@@ -1,10 +1,12 @@
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const movieContainer = document.getElementById("movieContainer");
 const moviePurchseBTN = document.createElement("button");
+const myCart = [];
 
 displayMovie(selectedMovie);
 
 function displayMovie(movie) {
+    myCart.push(JSON.parse(sessionStorage.getItem("cart")));
     const movieList = document.createElement("li");
     const movieTextContainer = document.createElement("li");
     const movieImg = document.createElement("img");
@@ -52,6 +54,11 @@ function displayMovie(movie) {
     movieTextContainer.appendChild(moviePurchseBTN);
 }
 
+moviePurchseBTN.addEventListener("click", function () {
+    myCart.push(selectedMovie);
+    sessionStorage.setItem("cart", JSON.stringify(myCart));
+});
+
 home.addEventListener("click", function () {
     document.location.href = "/index.html";
 });
@@ -60,56 +67,4 @@ movies.addEventListener("click", function () {
 });
 cart.addEventListener("click", function () {
     document.location.href = "/pages/checkout.html";
-});
-
-// const movieCart = [];
-
-// function movieInStorage(selectedMovie) {
-//     for (let i = 0; i < sessionStorage.length; i++) {
-//         const key = sessionStorage.key(i);
-//         const value = sessionStorage.getItem(key);
-//         if (value === selectedMovie) {
-//             moviePurchseBTN.innerText = "Remove from cart";
-//             return true;
-//         }
-//     }
-//     moviePurchseBTN.innerText = "Purchase";
-//     return false;
-// }
-
-// if (!movieInStorage(selectedMovie)) {
-//     sessionStorage.setItem(selectedMovie);
-// }
-
-// movieInStorage(selectedMovie);
-
-// moviePurchseBTN.addEventListener("click", function () {
-//     const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-//     cart.push(selectedMovie);
-//     sessionStorage.setItem("cart", JSON.stringify(cart));
-// });
-
-function movieInStorage(selectedMovie) {
-    for (let i = 0; i < sessionStorage.length; i++) {
-        const key = sessionStorage.key(i);
-        const value = sessionStorage.getItem(key);
-        if (value === selectedMovie) {
-            return true;
-        }
-    }
-    moviePurchseBTN.innerText = "Purchase";
-    return false;
-}
-
-if (!movieInStorage(selectedMovie)) {
-    sessionStorage.setItem("cart", JSON.stringify([]));
-}
-
-moviePurchseBTN.addEventListener("click", function () {
-    if (movieInStorage(selectedMovie) === true) {
-        moviePurchseBTN.innerText = "Remove from cart";
-    }
-    const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-    cart.push(selectedMovie);
-    sessionStorage.setItem("cart", JSON.stringify(cart));
 });
