@@ -1,5 +1,5 @@
 const movieContainer = document.getElementById("movieContainer");
-const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+const currentCart = JSON.parse(sessionStorage.getItem("myCart"));
 
 for (const movie of currentCart) {
     displayMovie(movie);

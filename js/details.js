@@ -54,7 +54,17 @@ function displayMovie(movie) {
 }
 
 moviePurchseBTN.addEventListener("click", function () {
-    movieCart.push(selectedMovie);
+    const movieExistsInCart = movieCart.some(
+        (cartItem) => cartItem.id === selectedMovie.id
+    );
+    if (movieExistsInCart) {
+        moviePurchseBTN.innerText = "Added to cart";
+        movieCart = movieCart.filter(
+            (cartItem) => cartItem.id !== selectedMovie.id
+        );
+    } else {
+        movieCart.push(selectedMovie);
+    }
 });
 
 window.onbeforeunload = function () {
