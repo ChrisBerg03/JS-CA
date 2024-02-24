@@ -1,9 +1,16 @@
 const movieContainer = document.getElementById("movieContainer");
 const currentCart = JSON.parse(sessionStorage.getItem("myCart"));
+const home = document.getElementById("home");
+const movies = document.getElementById("movies");
+const cart = document.getElementById("cart");
+const checkoutContainer = document.getElementById("checkoutContainer");
+let totalSum = 0;
 
 for (const movie of currentCart) {
     displayMovie(movie);
 }
+calculateTotal();
+displayCheckout();
 
 function displayMovie(movie) {
     const movieList = document.createElement("li");
@@ -15,6 +22,9 @@ function displayMovie(movie) {
     const movieRating = document.createElement("p");
     const movieRelease = document.createElement("p");
     const moviePrice = document.createElement("p");
+    const movieRemoveBTN = document.createElement("button");
+    movieRemoveBTN.innerText = "Remove from cart";
+    movieRemoveBTN.classList.add("removeBTN");
     movieTitle.classList.add("movieTitle");
     movieDescription.classList.add("movieDescription");
     movieImg.src = movie.image;
@@ -48,6 +58,22 @@ function displayMovie(movie) {
         movieTextContainer.appendChild(movieDiscountPrice);
     } else {
     }
+    movieTextContainer.appendChild(movieRemoveBTN);
+}
+function calculateTotal() {
+    for (const item of currentCart) {
+        const { price, discountedPrice } = item;
+        totalSum += discountedPrice || price;
+    }
+    return totalSum;
+}
+function displayCheckout() {
+    const totalSumContainer = document.createElement("h3");
+    const buy = document.createElement("button");
+    totalSumContainer.innerText = "Your total is: " + totalSum + " kr";
+    buy.innerText = "Buy movies";
+    checkoutContainer.appendChild(totalSumContainer);
+    checkoutContainer.appendChild(buy);
 }
 
 home.addEventListener("click", function () {
