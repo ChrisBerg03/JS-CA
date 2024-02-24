@@ -1,5 +1,5 @@
 .container {
-    max-width: 800px;
+    max-width: 900px;
 }
 
 .movieTitle {
@@ -11,6 +11,39 @@ main {
     flex-direction: row;
 }
 
+#movieContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#checkoutContainer {
+    width: 100px;
+}
+
 #checkoutContainer h3 {
     width: 100px;
+}
+
+#checkoutContainer button {
+    background: none;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border: none;
+    background-color: rgb(80, 10, 10, 50%);
+    border-radius: 16px;
+    font-size: 16px;
+}
+
+#checkoutContainer button:hover {
+    background-color: rgb(80, 10, 10, 100%);
+    cursor: pointer;
+}
+
+#movieList {
+    display: flex;
+    flex-direction: row;
+}
+
+#movieContainer {
+    display: flex;
+    flex-direction: row;
 }

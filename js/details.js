@@ -4,6 +4,16 @@ const moviePurchseBTN = document.createElement("button");
 const key = "myCart";
 const movieCart = JSON.parse(sessionStorage.getItem(key)) || [];
 
+home.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+movies.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+cart.addEventListener("click", function () {
+    document.location.href = "/pages/checkout.html";
+});
+
 displayMovie(selectedMovie);
 
 function displayMovie(movie) {
@@ -70,13 +80,3 @@ moviePurchseBTN.addEventListener("click", function () {
 window.onbeforeunload = function () {
     sessionStorage.setItem(key, JSON.stringify(movieCart));
 };
-
-home.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-movies.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-cart.addEventListener("click", function () {
-    document.location.href = "/pages/checkout.html";
-});

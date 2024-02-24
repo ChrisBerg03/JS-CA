@@ -5,6 +5,18 @@ const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
 let movieAllArray = [];
 
+home.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+movies.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+cart.addEventListener("click", function () {
+    document.location.href = "/pages/checkout.html";
+});
+
 async function fetchData() {
     const reponse = await fetch("https://api.noroff.dev/api/v1/square-eyes");
     const result = await reponse.json();
@@ -74,15 +86,3 @@ function moviesToDropDown() {
         movieFilter.appendChild(movieGenreOption);
     }
 }
-
-home.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-
-movies.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-
-cart.addEventListener("click", function () {
-    document.location.href = "/pages/checkout.html";
-});

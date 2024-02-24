@@ -4,7 +4,20 @@ const home = document.getElementById("home");
 const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
 const checkoutContainer = document.getElementById("checkoutContainer");
+const removeFromCartBTN = document.getElementById("removeBTN");
 let totalSum = 0;
+
+home.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+movies.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+
+cart.addEventListener("click", function () {
+    document.location.href = "/pages/checkout.html";
+});
 
 for (const movie of currentCart) {
     displayMovie(movie);
@@ -76,14 +89,4 @@ function displayCheckout() {
     checkoutContainer.appendChild(buy);
 }
 
-home.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-
-movies.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-
-cart.addEventListener("click", function () {
-    document.location.href = "/pages/checkout.html";
-});
+removeFromCartBTN.addEventListener("click", function () {});
