@@ -88,10 +88,16 @@ body {
     letter-spacing: 0.8px;
 }
 
-.moviePurchaseBTN {
+.moviePurchaseBTN,
+.removeBTN {
     background-color: #2d2f31;
     padding: 16px 32px;
     border-radius: 16px;
     font-size: 1.2rem;
     border: none;
+}
+
+.moviePurchaseBTN:hover,
+.removeBTN:hover {
+    cursor: pointer;
 }

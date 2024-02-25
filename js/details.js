@@ -1,9 +1,20 @@
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const movieContainer = document.getElementById("movieContainer");
+const moviePurchseBTN = document.createElement("button");
+const key = "myCart";
+const movieCart = JSON.parse(sessionStorage.getItem(key)) || [];
+
+home.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+movies.addEventListener("click", function () {
+    document.location.href = "/index.html";
+});
+cart.addEventListener("click", function () {
+    document.location.href = "/pages/checkout.html";
+});
 
 displayMovie(selectedMovie);
-
-console.log(selectedMovie);
 
 function displayMovie(movie) {
     const movieList = document.createElement("li");
@@ -15,13 +26,8 @@ function displayMovie(movie) {
     const movieRating = document.createElement("p");
     const movieRelease = document.createElement("p");
     const moviePrice = document.createElement("p");
-    const moviePurchseBTN = document.createElement("button");
     movieTitle.classList.add("movieTitle");
     movieDescription.classList.add("movieDescription");
-    movieGenre.classList.add("movieGenre");
-    movieRating.classList.add("movieRating");
-    movieRelease.classList.add("movieRelease");
-    moviePrice.classList.add("moviePrice");
     moviePurchseBTN.classList.add("moviePurchaseBTN");
     movieImg.src = movie.image;
     movieImg.classList.add("movieImage");
@@ -53,17 +59,24 @@ function displayMovie(movie) {
             "Price: " + movie.discountedPrice + " kr";
         movieDiscountPrice.classList.add("moviePrice");
         movieTextContainer.appendChild(movieDiscountPrice);
-    } else {
     }
     movieTextContainer.appendChild(moviePurchseBTN);
 }
 
-home.addEventListener("click", function () {
-    document.location.href = "/index.html";
+moviePurchseBTN.addEventListener("click", function () {
+    const movieExistsInCart = movieCart.some(
+        (cartItem) => cartItem.id === selectedMovie.id
+    );
+    if (movieExistsInCart) {
+        moviePurchseBTN.innerText = "Added to cart";
+        movieCart = movieCart.filter(
+            (cartItem) => cartItem.id !== selectedMovie.id
+        );
+    } else {
+        movieCart.push(selectedMovie);
+    }
 });
-movies.addEventListener("click", function () {
-    document.location.href = "/index.html";
-});
-cart.addEventListener("click", function () {
-    document.location.href = "/pages/checkout.html";
-});
+
+window.onbeforeunload = function () {
+    sessionStorage.setItem(key, JSON.stringify(movieCart));
+};
