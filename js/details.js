@@ -2,7 +2,7 @@ const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const movieContainer = document.getElementById("movieContainer");
 const moviePurchseBTN = document.createElement("button");
 const key = "myCart";
-const movieCart = JSON.parse(sessionStorage.getItem(key)) || [];
+let movieCart = JSON.parse(sessionStorage.getItem(key)) || [];
 
 home.addEventListener("click", function () {
     document.location.href = "/index.html";
@@ -68,15 +68,11 @@ moviePurchseBTN.addEventListener("click", function () {
         (cartItem) => cartItem.id === selectedMovie.id
     );
     if (movieExistsInCart) {
-        moviePurchseBTN.innerText = "Added to cart";
         movieCart = movieCart.filter(
             (cartItem) => cartItem.id !== selectedMovie.id
         );
     } else {
         movieCart.push(selectedMovie);
     }
-});
-
-window.onbeforeunload = function () {
     sessionStorage.setItem(key, JSON.stringify(movieCart));
-};
+});

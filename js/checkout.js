@@ -1,10 +1,13 @@
 const movieContainer = document.getElementById("movieContainer");
+const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const currentCart = JSON.parse(sessionStorage.getItem("myCart"));
 const home = document.getElementById("home");
 const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
+const moviePurchseBTN = document.createElement("button");
 const checkoutContainer = document.getElementById("checkoutContainer");
-const removeFromCartBTN = document.getElementById("removeBTN");
+const main = document.querySelector("main");
+
 let totalSum = 0;
 
 home.addEventListener("click", function () {
@@ -35,9 +38,9 @@ function displayMovie(movie) {
     const movieRating = document.createElement("p");
     const movieRelease = document.createElement("p");
     const moviePrice = document.createElement("p");
-    const movieRemoveBTN = document.createElement("button");
-    movieRemoveBTN.innerText = "Remove from cart";
-    movieRemoveBTN.classList.add("removeBTN");
+
+    moviePurchseBTN.classList.add("moviePurchaseBTN");
+    moviePurchseBTN.innerText = "Remove from cart";
     movieTitle.classList.add("movieTitle");
     movieDescription.classList.add("movieDescription");
     movieImg.src = movie.image;
@@ -71,8 +74,9 @@ function displayMovie(movie) {
         movieTextContainer.appendChild(movieDiscountPrice);
     } else {
     }
-    movieTextContainer.appendChild(movieRemoveBTN);
+    movieTextContainer.appendChild(moviePurchseBTN);
 }
+
 function calculateTotal() {
     for (const item of currentCart) {
         const { price, discountedPrice } = item;
@@ -80,13 +84,31 @@ function calculateTotal() {
     }
     return totalSum;
 }
+
 function displayCheckout() {
     const totalSumContainer = document.createElement("h3");
     const buy = document.createElement("button");
+    buy.setAttribute("id", "buyBTN");
     totalSumContainer.innerText = "Your total is: " + totalSum + " kr";
     buy.innerText = "Buy movies";
     checkoutContainer.appendChild(totalSumContainer);
     checkoutContainer.appendChild(buy);
 }
+const buyBTN = document.getElementById("buyBTN");
 
-removeFromCartBTN.addEventListener("click", function () {});
+buyBTN.addEventListener("click", function () {
+    main.innerHTML = "";
+    const purchaseSuccess = document.createElement("p");
+    purchaseSuccess.innerText = "congratulations, Your purchase was successful";
+    purchaseSuccess.classList.add("purchaseSuccess");
+    main.appendChild(purchaseSuccess);
+    returnTo.classList.add("returnBTN");
+    returnTo.innerText = "Return";
+    main.appendChild(returnTo);
+});
+const returnTo = document.createElement("button");
+
+returnTo.addEventListener("click", function () {
+    location.reload();
+    document.location.href = "/index.html";
+});
