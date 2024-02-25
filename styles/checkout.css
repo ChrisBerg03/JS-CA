@@ -9,6 +9,8 @@
 main {
     display: flex;
     flex-direction: row;
+    width: 800px;
+    justify-content: space-between;
 }
 
 #movieContainer {
@@ -46,4 +48,21 @@ main {
 #movieContainer {
     display: flex;
     flex-direction: row;
+}
+
+.returnBTN {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    font-size: 24px;
+}
+
+.purchaseSuccess {
+    font-size: 24px;
+}
+
+.returnBTN:hover {
+    background: #aaa;
+    cursor: pointer;
 }
