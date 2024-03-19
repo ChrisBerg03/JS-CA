@@ -15,7 +15,6 @@ cart.addEventListener("click", function () {
 });
 
 displayMovie(selectedMovie);
-
 function displayMovie(movie) {
     const movieList = document.createElement("li");
     const movieTextContainer = document.createElement("li");
