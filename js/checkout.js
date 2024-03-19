@@ -1,12 +1,13 @@
 const movieContainer = document.getElementById("movieContainer");
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
 const currentCart = JSON.parse(sessionStorage.getItem("myCart"));
+const movieRemoveBTN = document.createElement("button");
 const home = document.getElementById("home");
 const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
-const movieRemoveBTN = document.createElement("button");
 const checkoutContainer = document.getElementById("checkoutContainer");
 const main = document.querySelector("main");
+const loader = document.getElementById("loader");
 
 let totalSum = 0;
 
@@ -29,6 +30,7 @@ calculateTotal();
 displayCheckout();
 
 function displayMovie(movie) {
+    const movieRemoveBTN = document.createElement("button");
     const movieList = document.createElement("li");
     const movieTextContainer = document.createElement("li");
     const movieImg = document.createElement("img");
@@ -75,6 +77,7 @@ function displayMovie(movie) {
     } else {
     }
     movieTextContainer.appendChild(movieRemoveBTN);
+    hideLoader();
 }
 
 function calculateTotal() {
@@ -116,3 +119,7 @@ returnTo.addEventListener("click", function () {
 movieRemoveBTN.addEventListener("click", function () {
     currentCart;
 });
+
+function hideLoader() {
+    loader.remove("loader");
+}
