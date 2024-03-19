@@ -1,7 +1,6 @@
 const movieContainer = document.getElementById("movieContainer");
 const selectedMovie = JSON.parse(sessionStorage.getItem("selectedMovie"));
-const currentCart = JSON.parse(sessionStorage.getItem("myCart"));
-const movieRemoveBTN = document.createElement("button");
+let currentCart = JSON.parse(sessionStorage.getItem("myCart"));
 const home = document.getElementById("home");
 const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
@@ -23,11 +22,30 @@ cart.addEventListener("click", function () {
     document.location.href = "/pages/checkout.html";
 });
 
-for (const movie of currentCart) {
-    displayMovie(movie);
-}
 calculateTotal();
 displayCheckout();
+
+if (currentCart.length === 0) {
+    const noMovie = document.createElement("p");
+    noMovie.innerText = "No movies in cart";
+    movieContainer.appendChild(noMovie);
+} else {
+    for (const movie of currentCart) {
+        displayMovie(movie);
+    }
+    const movieRemoveBTN = document.createElement("button");
+    movieRemoveBTN.addEventListener("click", function () {
+        const movieExists = currentCart.some(
+            (cartItem) => cartItem.id === selectedMovie.id
+        );
+
+        if (movieExists) {
+            currentCart = currentCart.filter(
+                (cartItem) => cartItem.id !== selectedMovie.id
+            );
+        }
+    });
+}
 
 function displayMovie(movie) {
     const movieRemoveBTN = document.createElement("button");
@@ -74,10 +92,8 @@ function displayMovie(movie) {
             "Price: " + movie.discountedPrice + " kr";
         movieDiscountPrice.classList.add("moviePrice");
         movieTextContainer.appendChild(movieDiscountPrice);
-    } else {
     }
     movieTextContainer.appendChild(movieRemoveBTN);
-    hideLoader();
 }
 
 function calculateTotal() {
@@ -96,6 +112,7 @@ function displayCheckout() {
     buy.innerText = "Buy movies";
     checkoutContainer.appendChild(totalSumContainer);
     checkoutContainer.appendChild(buy);
+    hideLoader();
 }
 const buyBTN = document.getElementById("buyBTN");
 
@@ -114,10 +131,6 @@ const returnTo = document.createElement("button");
 returnTo.addEventListener("click", function () {
     location.reload();
     document.location.href = "/index.html";
-});
-
-movieRemoveBTN.addEventListener("click", function () {
-    currentCart;
 });
 
 function hideLoader() {
