@@ -129,6 +129,7 @@ buyBTN.addEventListener("click", function () {
 const returnTo = document.createElement("button");
 
 returnTo.addEventListener("click", function () {
+    sessionStorage.clear();
     location.reload();
     document.location.href = "/index.html";
 });
