@@ -3,6 +3,7 @@ const movieFilter = document.getElementById("movieFilter");
 const home = document.getElementById("home");
 const movies = document.getElementById("movies");
 const cart = document.getElementById("cart");
+const loader = document.getElementById("loader");
 let movieAllArray = [];
 
 home.addEventListener("click", function () {
@@ -27,6 +28,7 @@ async function fetchData() {
         displayMovie(movie);
     }
     moviesToDropDown();
+    hideLoader();
 }
 fetchData();
 
@@ -85,4 +87,8 @@ function moviesToDropDown() {
         movieGenreOption.innerText = genre;
         movieFilter.appendChild(movieGenreOption);
     }
+}
+
+function hideLoader() {
+    loader.remove("loader");
 }

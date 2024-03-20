@@ -15,7 +15,6 @@ cart.addEventListener("click", function () {
 });
 
 displayMovie(selectedMovie);
-
 function displayMovie(movie) {
     const movieList = document.createElement("li");
     const movieTextContainer = document.createElement("li");
@@ -67,6 +66,7 @@ moviePurchseBTN.addEventListener("click", function () {
     const movieExistsInCart = movieCart.some(
         (cartItem) => cartItem.id === selectedMovie.id
     );
+    moviePurchseBTN.innerText = "Remove from cart";
     if (movieExistsInCart) {
         movieCart = movieCart.filter(
             (cartItem) => cartItem.id !== selectedMovie.id
