@@ -7,6 +7,7 @@ const cart = document.getElementById("cart");
 const checkoutContainer = document.getElementById("checkoutContainer");
 const main = document.querySelector("main");
 const loader = document.getElementById("loader");
+const key = "myCart";
 
 let totalSum = 0;
 
@@ -33,18 +34,6 @@ if (currentCart.length === 0) {
     for (const movie of currentCart) {
         displayMovie(movie);
     }
-    const movieRemoveBTN = document.createElement("button");
-    movieRemoveBTN.addEventListener("click", function () {
-        const movieExists = currentCart.some(
-            (cartItem) => cartItem.id === selectedMovie.id
-        );
-
-        if (movieExists) {
-            currentCart = currentCart.filter(
-                (cartItem) => cartItem.id !== selectedMovie.id
-            );
-        }
-    });
 }
 
 function displayMovie(movie) {
@@ -94,6 +83,30 @@ function displayMovie(movie) {
         movieTextContainer.appendChild(movieDiscountPrice);
     }
     movieTextContainer.appendChild(movieRemoveBTN);
+
+    movieRemoveBTN.addEventListener("click", function () {
+        const movieExists = currentCart.some(
+            (cartItem) => cartItem.id === movie.id
+        );
+        if (movieExists) {
+            currentCart = currentCart.filter(
+                (cartItem) => cartItem.id !== movie.id
+            );
+            movieContainer.innerHTML = "";
+            sessionStorage.setItem(key, JSON.stringify(currentCart));
+            totalSum = 0;
+            calculateTotal();
+            const totalSumContainer = document.querySelector(
+                "#checkoutContainer h3"
+            );
+            totalSumContainer.innerHTML = "Your total is: " + totalSum + " kr";
+
+            for (const movie of currentCart) {
+                displayMovie(movie);
+            }
+        }
+    });
+    hideLoader();
 }
 
 function calculateTotal() {
@@ -112,8 +125,8 @@ function displayCheckout() {
     buy.innerText = "Buy movies";
     checkoutContainer.appendChild(totalSumContainer);
     checkoutContainer.appendChild(buy);
-    hideLoader();
 }
+
 const buyBTN = document.getElementById("buyBTN");
 
 buyBTN.addEventListener("click", function () {
@@ -126,6 +139,7 @@ buyBTN.addEventListener("click", function () {
     returnTo.innerText = "Return";
     main.appendChild(returnTo);
 });
+
 const returnTo = document.createElement("button");
 
 returnTo.addEventListener("click", function () {
@@ -135,5 +149,6 @@ returnTo.addEventListener("click", function () {
 });
 
 function hideLoader() {
-    loader.remove("loader");
+    // loader.classList.remove("loader");
+    loader.style.display = "none";
 }
