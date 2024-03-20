@@ -130,14 +130,19 @@ function displayCheckout() {
 const buyBTN = document.getElementById("buyBTN");
 
 buyBTN.addEventListener("click", function () {
-    main.innerHTML = "";
-    const purchaseSuccess = document.createElement("p");
-    purchaseSuccess.innerText = "congratulations, Your purchase was successful";
-    purchaseSuccess.classList.add("purchaseSuccess");
-    main.appendChild(purchaseSuccess);
-    returnTo.classList.add("returnBTN");
-    returnTo.innerText = "Return";
-    main.appendChild(returnTo);
+    if (currentCart.length == 0) {
+        alert("No items in cart");
+    } else {
+        main.innerHTML = "";
+        const purchaseSuccess = document.createElement("p");
+        purchaseSuccess.innerText =
+            "congratulations, Your purchase was successful";
+        purchaseSuccess.classList.add("purchaseSuccess");
+        main.appendChild(purchaseSuccess);
+        returnTo.classList.add("returnBTN");
+        returnTo.innerText = "Return";
+        main.appendChild(returnTo);
+    }
 });
 
 const returnTo = document.createElement("button");
@@ -149,6 +154,5 @@ returnTo.addEventListener("click", function () {
 });
 
 function hideLoader() {
-    // loader.classList.remove("loader");
     loader.style.display = "none";
 }
