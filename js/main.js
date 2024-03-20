@@ -39,8 +39,7 @@ function displayMovie(movie) {
     movieImg.classList.add("movieImage");
     movieImg.addEventListener("click", () => {
         sessionStorage.setItem("selectedMovie", JSON.stringify(movie));
-        window.location.href =
-            "https://js-ca-chris-projects-614842c3.vercel.app/pages/details.html";
+        window.location.href = "http://127.0.0.1:5500/pages/details.html";
     });
     movieContainer.appendChild(movieList);
     movieList.appendChild(movieImg);
